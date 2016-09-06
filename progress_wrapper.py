@@ -13,7 +13,7 @@ class ProgressWrapper:
         :param iterable: iterable
         :param progressbar:
             A progress bar object. It has to have an attribute "total"
-            and a method "update([n])"
+            and a method "update_progress([n])"
         :param total: int
             The length of the iterabld
         """
@@ -35,4 +35,4 @@ class ProgressWrapper:
     def __iter__(self):
         for element in self.iterable:
             yield element
-            self.progressbar.update()
+            self.progressbar.update_progress()
