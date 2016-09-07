@@ -1,5 +1,34 @@
 # (c) Anton Melnikov 2016
 
+import abc
+
+class ProgressBar(abc.ABC):
+    def __iter__(self, total=0):
+        ...
+
+    @property
+    @abc.abstractmethod
+    def total(self):
+        ...
+
+    @total.setter
+    @abc.abstractmethod
+    def total(self, total):
+        ...
+
+    @abc.abstractmethod
+    def update_progress(self, n=1):
+        ...
+
+    @abc.abstractmethod
+    def reset(self):
+        ...
+
+    @abc.abstractmethod
+    def set_progress(self, n=1):
+        ...
+
+
 class ProgressWrapper:
     """
     Wraps an iterable and returns an iterable which acts like
@@ -7,7 +36,7 @@ class ProgressWrapper:
     in the process.
     """
 
-    def __init__(self, iterable, progressbar, total=None):
+    def __init__(self, iterable, progressbar: ProgressBar, total=None):
         """
         Parameters
         :param iterable: iterable
@@ -36,3 +65,9 @@ class ProgressWrapper:
         for element in self.iterable:
             yield element
             self.progressbar.update_progress()
+
+    def reset(self):
+        self.progressbar.reset()
+
+
+
