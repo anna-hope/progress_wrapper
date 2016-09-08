@@ -7,7 +7,7 @@ from .progress_wrapper import ProgressBar
 
 class TqdmWrapper(ProgressBar):
     def __init__(self, total=0, tqdm_=None):
-        if tqdm:
+        if tqdm_:
             self.tqdm = tqdm_
         else:
             self.tqdm = tqdm()
