@@ -3,8 +3,7 @@
 
 from tqdm import tqdm
 
-from . import ProgressBar
-
+from .progress_wrapper import ProgressBar
 
 class TqdmWrapper(ProgressBar):
     def __init__(self, total=0, tqdm_=None):
