@@ -1,6 +1,7 @@
 # (c) Anton Melnikov 2016
 
 import abc
+from typing import Union, Sequence, Iterable
 
 class ProgressBar(abc.ABC):
     def __iter__(self, total=0):
@@ -36,10 +37,11 @@ class ProgressWrapper:
     in the process.
     """
 
-    def __init__(self, iterable, progressbar: ProgressBar, total=None):
+    def __init__(self, iterable: Union[Iterable, Sequence],
+                 progressbar: ProgressBar, total=None):
         """
         Parameters
-        :param iterable: iterable
+        :param iterable: iterable, sequence
         :param progressbar:
             A progress bar object. It has to have an attribute "total"
             and a method "update_progress([n])"
@@ -55,8 +57,7 @@ class ProgressWrapper:
             try:
                 self.total = len(iterable)
             except TypeError:
-                raise ValueError('Could not determine the length of the iterable, '
-                                 + 'and no total was given.')
+                self.total = -1
 
         self.progressbar.total = self.total
 
